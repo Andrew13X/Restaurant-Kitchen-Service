@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Cook List {% endblock title %}
+
+{% block body %} {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+{% block content %}
+  
+<section class="pt-9 pb-5">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6">
+        <h1 class="row justify-content-center">
+          Cooks
+          <a href="{% url 'catalog:cook-create' %}" class="btn btn-primary">
+            Create cook
+          </a>
+        </h1>
+        {% if cook_list %}
+          {% include "includes/search_from.html" %}
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Years of experience</th>
+            </tr>
+          {% for cook in cook_list %}
+            <tr>
+              <td>{{ cook.id }}</td>
+              <td><a class="link-primary" href="{{ cook.get_absolute_url }}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>
+              <td>{{ cook.first_name }}</td>
+              <td>{{ cook.last_name }}</td>
+              <td>{{ cook.years_of_experience }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+        {% else %}
+          <p>There are no cooks.</p>
+        {% endif %}
+      
+        {% include "includes/pagination.html" %}
+      
+      </div>
+    </div>
+  </div>
+</section>
+  
+{% endblock content %}
+  

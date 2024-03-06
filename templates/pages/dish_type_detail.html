@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Dish List {% endblock title %}
+
+{% block body %} {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+{% block content %}
+
+<section class="pt-9 pb-5">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6">
+        <h1 class="row d-flex justify-content-center">
+          {{ dish_type.name }}
+          <a href="{% url 'catalog:dish-type-update' pk=dish_type.pk %}" class="btn btn-primary link-to-page">
+            Update dish type
+          </a>
+        </h1>
+          <p><strong>ID:</strong> {{ dish_type.id }}</p>
+          <p><strong>Name:</strong> {{ dish_type.name }}</p>
+        <h3>
+          <a href="{% url 'catalog:dish-type-delete' pk=dish_type.pk %}" class="btn btn-danger link-to-page">
+            Delete dish type
+          </a>
+        </h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
