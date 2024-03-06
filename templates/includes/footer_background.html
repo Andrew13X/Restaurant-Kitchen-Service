@@ -1,0 +1,44 @@
+{% load static %}
+
+<footer class="footer pt-1 mt-1">
+  <hr class="horizontal dark mb-5">
+  <div class="container">
+    <div class=" row">
+      <div class="col-md-3 mb-4 ms-auto">
+        <div>
+          <a href="/" rel="tooltip">
+            <h6 class="text-gradient text-primary font-weight-bolder">RESTAURANT KITCHEN SERVICE</h6>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <a href="{% url 'catalog:cook-list' %}">
+            <h6 class="text-gradient text-primary text-sm">Cooks</h6>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-6 mb-4">
+        <div>
+          <a href="{% url 'catalog:dish-list' %}">
+            <h6 class="text-gradient text-primary text-sm">Dishes</h6>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-6 mb-4 me-auto">
+        <div>
+          <a href="{% url 'catalog:dish-type-list' %}">
+            <h6 class="text-gradient text-primary text-sm">Dish types</h6>
+          </a>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="text-center">
+          <p class="my-4 text-sm">
+            &copy; <a href="/" rel="tooltip" target="_blank">RESTAURANT KITCHEN SERVICE</a> - Coded by Andrew13.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

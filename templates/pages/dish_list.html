@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Dish List {% endblock title %}
+
+{% block body %} {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+{% block content %}
+
+<section class="pt-9 pb-5">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6">
+        <h1 class="row d-flex justify-content-center">
+          Dishes
+          <a href="{% url 'catalog:dish-create' %}" class="btn btn-primary link-to-page">
+            Create dish
+          </a>
+        </h1>
+
+    {% include "includes/search_from.html" %}
+
+        {% if dish_list %}
+          {% for dish in dish_list %}
+            <div style="border-bottom:1px solid #ccc; margin-bottom: 15px">
+              <p><strong>ID:</strong>{{ dish.id }}</p>
+              <p><strong>Name:</strong><a class="link-primary" href="{% url 'catalog:dish-detail' pk=dish.pk %}"> {{ dish.name }}</a></p>
+              <p><strong>Description:</strong> {{ dish.description }}</p>
+              <p><strong>Price:</strong> {{ dish.price }}</p>
+              <p><strong>Dish type:</strong> {{ dish.dish_type.name }}</p>
+            </div>    
+          {% endfor %}
+        {% else %}
+          <p>There are no dishes.</p>
+        {% endif %}
+
+        {% include "includes/pagination.html" %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

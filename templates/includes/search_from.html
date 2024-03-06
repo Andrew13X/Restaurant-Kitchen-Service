@@ -1,0 +1,10 @@
+{% load crispy_forms_filters %}
+<form action="" method="get" class="link-to-page">
+  <div class="input-group" style="width: 500px">
+    {{ search_form|crispy }}   
+    <input type="submit" value="🔍" class="btn btn-primary" style="margin-left: 2px;
+    border-top-left-radius: 15%;
+    border-bottom-left-radius: 15%;">
+  </div>
+</form>
+<br>
