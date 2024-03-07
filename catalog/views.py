@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Cook, Dish, DishType
@@ -97,7 +97,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Dish.objects.all().select_related("dish_type")
+        queryset = Dish.objects.select_related("dish_type")
         form = DishNameSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(name__icontains=form.cleaned_data["name"])
@@ -137,7 +137,9 @@ class CookListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CookListView, self).get_context_data(**kwargs)
         username = self.request.GET.get("username", "")
-        context["search_form"] = CookUsernameSearchForm(initial={"username": username})
+        context["search_form"] = CookUsernameSearchForm(
+            initial={"username": username}
+        )
         return context
 
     def get_queryset(self):
@@ -151,7 +153,7 @@ class CookListView(LoginRequiredMixin, generic.ListView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
-    queryset = Cook.objects.all().prefetch_related("dishes__dish_type")
+    queryset = Cook.objects.all()
     template_name = "pages/cook_detail.html"
 
 
@@ -174,13 +176,15 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("catalog:cook-list")
 
 
-@login_required
-def toggle_assign_to_dish(request, pk):
-    cook = Cook.objects.get(id=request.user.id)
-    if (
-        Dish.objects.get(id=pk) in cook.dishes.all()
-    ):  # probably could check if dish exists
-        cook.dishes.remove(pk)
-    else:
-        cook.dishes.add(pk)
-    return HttpResponseRedirect(reverse_lazy("catalog:dish-detail", args=[pk]))
+class AssignDeleteDishView(LoginRequiredMixin, View):
+    def post(self, request, **kwargs):
+        cook = Cook.objects.get(id=request.user.id)
+        if (
+                Dish.objects.get(id=kwargs["pk"]) in cook.dishes.all()
+        ):  # probably could check if dish exists
+            cook.dishes.remove(kwargs["pk"])
+        else:
+            cook.dishes.add(kwargs["pk"])
+        return HttpResponseRedirect(
+            reverse_lazy("catalog:dish-detail", kwargs={"pk": kwargs["pk"]})
+        )

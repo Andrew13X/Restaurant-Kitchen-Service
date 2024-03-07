@@ -37,15 +37,18 @@
             {% endfor %}
           </p>
         <h3>
-          {% if dish in user.dishes.all %}
-          <a href="{% url 'catalog:toggle-dish-assign' pk=dish.id %}" class="btn btn-danger link-to-page">
-            Delete me from this dish
-          </a>
-          {% else %}
-            <a href="{% url 'catalog:toggle-dish-assign' pk=dish.id %}" class="btn btn-success link-to-page">
-              Assign me to this dish
-            </a>
-          {% endif %}
+          <form action="{% url 'catalog:toggle-dish-assign' pk=dish.id %}" method="post">
+            {% csrf_token %}
+            {% if dish in user.dishes.all %}
+              <button class="btn btn-danger link-to-page">
+                Delete me from this dish
+              </button>
+            {% else %}
+              <button class="btn btn-success link-to-page">
+                Assign me to this dish
+              </button>
+            {% endif %}
+          </form>
         </h3>
         <h3>
           <a href="{% url 'catalog:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">

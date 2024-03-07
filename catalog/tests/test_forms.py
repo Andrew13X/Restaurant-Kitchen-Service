@@ -107,7 +107,8 @@ class DishTypeTest(TestCase):
         )
         DishType.objects.get(id=dish_type.id).refresh_from_db()
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(DishType.objects.get(id=dish_type.id).name, "Not Pasta")
+        self.assertEqual(DishType.objects.get(
+            id=dish_type.id).name, "Not Pasta")
 
     def test_delete_dish_type(self):
         dish_type = DishType.objects.create(
@@ -141,12 +142,16 @@ class CookTest(TestCase):
             "years_of_experience": 3,
         }
 
-        response = self.client.post(reverse("catalog:cook-create"), data=form_data)
+        response = self.client.post(
+            reverse("catalog:cook-create"), data=form_data
+        )
         new_cook = get_user_model().objects.get(username="Bobby")
         self.assertEqual(response.status_code, 302)
         self.assertEqual(new_cook.first_name, form_data["first_name"])
         self.assertEqual(new_cook.last_name, form_data["last_name"])
-        self.assertEqual(new_cook.years_of_experience, form_data["years_of_experience"])
+        self.assertEqual(
+            new_cook.years_of_experience, form_data["years_of_experience"]
+        )
         self.assertTrue(new_cook.check_password("1qazcde3"))
 
     def test_update_cook_years_of_experience(self):
@@ -211,7 +216,11 @@ class SearchFormTests(TestCase):
         form = DishNameSearchForm(data={"name": "Karbonara"})
         form.is_valid()
         self.assertEqual(
-            list(Dish.objects.filter(name__icontains=form.cleaned_data.get("name"))),
+            list(
+                Dish.objects.filter(
+                    name__icontains=form.cleaned_data.get("name")
+                )
+            ),
             list(Dish.objects.filter(name__icontains="Karbonara")),
         )
 
@@ -226,7 +235,9 @@ class SearchFormTests(TestCase):
         form.is_valid()
         self.assertEqual(
             list(
-                DishType.objects.filter(name__icontains=form.cleaned_data.get("name"))
+                DishType.objects.filter(
+                    name__icontains=form.cleaned_data.get("name")
+                )
             ),
             list(DishType.objects.filter(name__icontains="Pasta")),
         )
@@ -254,5 +265,7 @@ class SearchFormTests(TestCase):
                     username__icontains=form.cleaned_data.get("username")
                 )
             ),
-            list(get_user_model().objects.filter(username__icontains="David123")),
+            list(
+                get_user_model().objects.filter(username__icontains="David123")
+            ),
         )
