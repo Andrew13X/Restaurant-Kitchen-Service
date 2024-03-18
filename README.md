@@ -1,7 +1,23 @@
-"Restaurant-Kitchen-Service"
+# Restaurant-Kitchen-Service
 
 Management system for improving communication 
 & rules between cooks on the kitchen.
+
+## Installation
+
+Python must be installed 
+
+...
+git clone https://github.com/Andrew13X/Restaurant-Kitchen-Service.git
+cd restaurant-kitchen-service
+python -m venv venv
+venv\Scripts\activate (on Windows)
+source venv/bin/activate (on macOS)
+pip install -r requirements.txt
+python manage.py runserver
+...
+
+## Features
 
 1. The site is available only for authenticated users.
 To login you can use following superuser:
@@ -30,3 +46,4 @@ On each detailed page elements can be created, updated or deleted.
 10. Inside the directory catalog/static there are css, fonts, images, js and scss files.
 
 11. Inside catalog/templatetags we have query_transform.py file.
+
