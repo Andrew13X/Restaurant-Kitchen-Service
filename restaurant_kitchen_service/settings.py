@@ -35,7 +35,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "restaurant-kitchen-service-jso7.onrender.com/"
+    "restaurant-kitchen-service-jso7.onrender.com"
 ]
 
 INTERNAL_IPS = [
