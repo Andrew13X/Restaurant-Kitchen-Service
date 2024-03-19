@@ -32,11 +32,14 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = "RENDER" not in os.environ
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "restaurant-kitchen-service-jso7.onrender.com/"
+]
 
 INTERNAL_IPS = [
     "127.0.0.1",
-    "restaurant-kitchen-service-jso7.onrender.com/"
 ]
 
 # Application definition
