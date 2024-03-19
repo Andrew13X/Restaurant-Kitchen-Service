@@ -3,6 +3,10 @@
 Management system for improving communication 
 & rules between cooks on the kitchen.
 
+## Check it out
+
+[Restaurant-Kitchen-Service project is deployed to render] (https://restaurant-kitchen-service-jso7.onrender.com/)
+
 ## Installation
 
 Python must be installed 
@@ -20,9 +24,6 @@ python manage.py runserver
 ## Features
 
 1. The site is available only for authenticated users.
-To login you can use following superuser:
-    - login: Bob
-    - password: Qwerty@123
 
 2. The is one application in the project structure - catalog.
 
