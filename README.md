@@ -25,6 +25,10 @@ python manage.py runserver
 
 1. The site is available only for authenticated users.
 
+    You can use following user (or create another one by yourself):
+    login: user
+    password: user12345
+
 2. The is one application in the project structure - catalog.
 
 3. Three models are defined in models.py: dishtype, cook and dish.
