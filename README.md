@@ -11,7 +11,7 @@ Management system for improving communication
 
 Python must be installed 
 
-...
+```
 git clone https://github.com/Andrew13X/Restaurant-Kitchen-Service.git
 cd restaurant-kitchen-service
 python -m venv venv
@@ -19,15 +19,16 @@ venv\Scripts\activate (on Windows)
 source venv/bin/activate (on macOS)
 pip install -r requirements.txt
 python manage.py runserver
-...
+```
 
 ## Features
 
 1. The site is available only for authenticated users.
-
-    You can use following user (or create another one by yourself):
-    login: user
-    password: user12345
+```
+You can use following user (or create another one by yourself):
+login: user
+password: user12345
+```
 
 2. The is one application in the project structure - catalog.
 
